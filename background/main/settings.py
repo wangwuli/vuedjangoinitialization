@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xlauto2',
-        'USER': 'root',
+        'NAME': 'xlauto',
+        'USER': 'liww',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '172.16.10.243',
         'PORT': '3306',
     }
 }

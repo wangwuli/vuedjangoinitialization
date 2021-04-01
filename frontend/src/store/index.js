@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     tabsPage: [{
       title: '主页',
-      name: 'home_one'
+      name: 'home'
     }],
     TabsValue: ''
   },

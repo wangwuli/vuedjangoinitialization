@@ -27,15 +27,15 @@
     </el-aside>
     <el-container>
       <el-header style="font-size: 12px; width: 100%">
-        <el-button type="primary" size="mini">新增环境</el-button>
-        <el-button type="primary" size="mini">编辑环境</el-button>
-        <el-button type="primary" size="mini">删除环境</el-button>
-        <el-button type="primary" size="mini">新增主机</el-button>
-        <el-button type="primary" size="mini">编辑主机</el-button>
-        <el-button type="primary" size="mini">删除主机</el-button>
-        <el-button type="primary" size="mini">新增软件</el-button>
-        <el-button type="primary" size="mini">编辑软件</el-button>
-        <el-button type="primary" size="mini">删除软件</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-s-flag">新增环境</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-s-flag">编辑环境</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-s-flag">删除环境</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-monitor">新增主机</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-monitor">编辑主机</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-monitor">删除主机</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-takeaway-box">新增软件</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-takeaway-box">编辑软件</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-takeaway-box">删除软件</el-button>
       </el-header>
       <el-main>
         <el-table

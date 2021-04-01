@@ -4,6 +4,8 @@ import soft_deploy from "../components/soft_deploy/soft_deploy";
 import app_deploy from "../components/app_deploy/app_deploy";
 import login from "../components/login/login";
 import home from "../home/home";
+import app_conf from "../components/app_conf/app_conf";
+import setting from "../components/setting";
 
 const routes = [
   {
@@ -38,6 +40,16 @@ const routes = [
     path: '/app_deploy',
     name: 'app_deploy',
     component: app_deploy
+  },
+  {
+    path: '/app_conf',
+    name: 'app_conf',
+    component: app_conf
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    component: setting
   }
 ]
 

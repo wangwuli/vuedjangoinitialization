@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
-from utils.views import Result
+
+from background.utils.views import Result
 
 
 class Create_user(APIView):

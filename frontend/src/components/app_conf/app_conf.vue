@@ -27,13 +27,9 @@
     </el-aside>
     <el-container>
       <el-header style="font-size: 12px; width: 100%">
-        <el-button type="primary" size="mini">部署</el-button>
-        <el-button type="primary" size="mini">部署调整</el-button>
-        <el-button type="primary" size="mini">日志查看</el-button>
-        <el-button type="primary" size="mini">重启</el-button>
-        <el-button type="primary" size="mini">停止</el-button>
-        <el-button type="primary" size="mini">清理缓存</el-button>
-        <el-button type="primary" size="mini">包下载</el-button>
+        <el-button type="success" size="mini">新增</el-button>
+        <el-button type="primary" size="mini">编辑</el-button>
+        <el-button type="danger" size="mini">删除</el-button>
       </el-header>
       <el-main>
         <el-table
@@ -43,7 +39,7 @@
             :data="tableData1"
             style="font-size: 10px; width: 100%">
           <el-table-column
-              label="服务器ip"
+              label="服务器IP"
               prop="date">
           </el-table-column>
           <el-table-column
@@ -51,17 +47,20 @@
               prop="id">
           </el-table-column>
           <el-table-column
-              label="包名称"
+              label="安装路径"
+              prop="path">
+          </el-table-column>
+          <el-table-column
+              label="应用包"
               prop="name">
           </el-table-column>
           <el-table-column
-              show-overflow-tooltip
-              prop="vestion"
-              label="版本">
+              label="包来源"
+              prop="b_src">
           </el-table-column>
           <el-table-column
               label="关联软件"
-              prop="name_link">
+              prop="link_soft">
           </el-table-column>
           <el-table-column
               label="部署方式"
@@ -69,6 +68,10 @@
           </el-table-column>
           <el-table-column
               label="部署状态"
+              prop="desc">
+          </el-table-column>
+          <el-table-column
+              label="运行状态"
               prop="desc">
           </el-table-column>
         </el-table>
@@ -105,23 +108,27 @@ export default {
         name: 'linkware-push',
         other: '其他信息',
         dep: "jar",
-        name_link: "tomcat1",
-        software_data: []
+        link_soft: "tomcat1",
+        software_data: [],
+        b_src: 'nexus'
       }, {
         id: "包名称2",
         date: '192.168.1.2',
         name: 'linkware-dhs',
         other: '其他信息',
         dep: "war",
-        name_link: "tomcat2",
-        software_data: []
+        link_soft: "tomcat1",
+        software_data: [],
+        b_src: 'ftp'
       }, {
         id: "包名称3",
         date: '192.168.1.3',
         name: 'linkware-alarm',
         other: '其他信息',
         dep: "镜像",
-        software_data: []
+        link_soft: "无",
+        software_data: [],
+        b_src: '本地'
       }]
     }
   },

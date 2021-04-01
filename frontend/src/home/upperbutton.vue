@@ -78,7 +78,7 @@ export default {
     }
     // this.bindScrollEvent()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     // 记得销毁一些全局的的事件
     this.removeScrollEvent()
   },
