@@ -3,8 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.views import APIView
-
-from utils.views import Result
+from background.utils.views import Result
 
 
 class Login(APIView):

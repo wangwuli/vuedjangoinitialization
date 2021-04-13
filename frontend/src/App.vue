@@ -1,70 +1,17 @@
+
 <template>
-  <el-container>
-    <el-header style="padding-right: 0px;padding-left: 0px;">
-    <el-menu
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-      :default-active="activeIndex"
-      router
-      mode="horizontal"
-      width="100%"
-    >
-      <NavMenu :navMenus="menuData" style="width:800px;overflow-x:auto;">
-      </NavMenu> <!-- 我是菜单栏组件 -->
-    </el-menu>
-  </el-header>
-  <el-main style="padding-right: 0px;padding-left: 0px;">
-    <mainTabs /> <!-- 我是tabs组件 -->
-  </el-main>
-  <el-aside>
-    <upperbutton /> <!-- 我是悬浮按钮组件 -->
-  </el-aside>
-  </el-container>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
 <script>
-import NavMenu from '@/home/menutree'
-import * as Request from './general/request.js'
-import mainTabs from '@/home/tabs'
-import upperbutton from '@/home/upperbutton'
-
-export default {
-  created () {
-    this.homemenuQuery()
-  },
-
-  components: {
-    NavMenu: NavMenu,
-    mainTabs: mainTabs,
-    upperbutton: upperbutton
-  },
-  data () {
-    return {
-      activeIndex: '主页',
-      menuData: []
-    }
-  },
-  methods: {
-    async homemenuQuery () {
-      const response = await Request.GET('/background/home/menu_manage')
-      if (response && response.data) {
-        var data = response.data
-        if (data.success) {
-          this.$message.success(data.msg)
-          this.menuData = data.data
-        } else {
-          this.$message.error(data.msg)
-        }
-      }
-    }
+  export default {
+    name: 'App'
   }
-}
 </script>
-
 <style>
-  * {
-    outline: none;
+  .el-drawer__header span:focus {
+    outline: 0 !important;
   }
 </style>
-<!--thanks https://blog.csdn.net/qq_31126175/article/details/81875468-->

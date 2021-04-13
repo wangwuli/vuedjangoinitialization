@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
   UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.django_content_type 的数据：~5 rows (大约)
+-- 正在导出表  xlauto.django_content_type 的数据：~4 rows (大约)
 DELETE FROM `django_content_type`;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.django_migrations 的数据：~15 rows (大约)
+-- 正在导出表  xlauto.django_migrations 的数据：~14 rows (大约)
 DELETE FROM `django_migrations`;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
@@ -149,6 +149,75 @@ DELETE FROM `django_session`;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 
+-- 导出  表 xlauto.link_env 结构
+DROP TABLE IF EXISTS `link_env`;
+CREATE TABLE IF NOT EXISTS `link_env` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `env_name` varchar(50) DEFAULT NULL COMMENT '环境名',
+  `env_code` varchar(50) DEFAULT NULL COMMENT '环境编码',
+  `列 4` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `env_code` (`env_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 正在导出表  xlauto.link_env 的数据：~0 rows (大约)
+DELETE FROM `link_env`;
+/*!40000 ALTER TABLE `link_env` DISABLE KEYS */;
+/*!40000 ALTER TABLE `link_env` ENABLE KEYS */;
+
+-- 导出  表 xlauto.package_management 结构
+DROP TABLE IF EXISTS `package_management`;
+CREATE TABLE IF NOT EXISTS `package_management` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `package_name` varchar(50) DEFAULT '0',
+  `project_id` int(20) DEFAULT '0',
+  `package_git_url` varchar(200) DEFAULT '0',
+  `branch` varchar(200) DEFAULT NULL,
+  `package_versions` varchar(200) DEFAULT '0',
+  `package_repository_url` varchar(200) DEFAULT '0',
+  `package_repository_code` varchar(50) DEFAULT '0',
+  `package_nick` varchar(50) DEFAULT '0',
+  `package_type_code` varchar(50) DEFAULT '0',
+  `comment` varchar(50) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `project_id` (`project_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  xlauto.package_management 的数据：~0 rows (大约)
+DELETE FROM `package_management`;
+/*!40000 ALTER TABLE `package_management` DISABLE KEYS */;
+INSERT INTO `package_management` (`id`, `package_name`, `project_id`, `package_git_url`, `branch`, `package_versions`, `package_repository_url`, `package_repository_code`, `package_nick`, `package_type_code`, `comment`) VALUES
+	(1, 'testPackage', 11, 'http://www.baidu.com', NULL, '2', 'http://www.baidu.com', '', '0', '1', '0'),
+	(2, 'testPackage2', 12, 'http://www.baidu.com', NULL, NULL, '2', 'http://www.baidu.com', '', '0', '1'),
+	(3, 'testPackage3', 13, 'http://www.baidu.com', NULL, NULL, '2', 'http://www.baidu.com', '', '0', '1'),
+	(4, 'xx1', 1, 'xx1', 'xx1', 'xx1', 'xx1', 'xx1', NULL, 'shanghai', 'xx1'),
+	(5, 'xx1', 1, 'xx1', 'xx1', 'xx1', 'xx1', 'xx1', NULL, 'shanghai', 'xx1'),
+	(6, 'xx2', 2, 'xx2', 'xx2', 'xx2', 'xx2', 'xx2', NULL, 'beijing', 'xx2');
+/*!40000 ALTER TABLE `package_management` ENABLE KEYS */;
+
+-- 导出  表 xlauto.sys_code 结构
+DROP TABLE IF EXISTS `sys_code`;
+CREATE TABLE IF NOT EXISTS `sys_code` (
+  `sys_code_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sys_code` varchar(50) DEFAULT NULL,
+  `sys_code_name` varchar(50) DEFAULT NULL,
+  `sys_code_type` varchar(50) DEFAULT NULL,
+  `sys_code_father` varchar(50) DEFAULT NULL,
+  `sys_code_sort` varchar(50) DEFAULT NULL,
+  `comment` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`sys_code_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  xlauto.sys_code 的数据：~0 rows (大约)
+DELETE FROM `sys_code`;
+/*!40000 ALTER TABLE `sys_code` DISABLE KEYS */;
+INSERT INTO `sys_code` (`sys_code_id`, `sys_code`, `sys_code_name`, `sys_code_type`, `sys_code_father`, `sys_code_sort`, `comment`) VALUES
+	(1, 'ftp', 'FTP', 'package_repository', NULL, NULL, NULL),
+	(2, 'nexus', 'Nexus', 'package_repository', NULL, NULL, NULL),
+	(3, 'jar', 'Jar', 'package_type', NULL, NULL, NULL),
+	(4, 'war', 'War', 'package_type', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `sys_code` ENABLE KEYS */;
+
 -- 导出  表 xlauto.sys_menu 结构
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE IF NOT EXISTS `sys_menu` (
@@ -163,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.sys_menu 的数据：~12 rows (大约)
+-- 正在导出表  xlauto.sys_menu 的数据：~14 rows (大约)
 DELETE FROM `sys_menu`;
 /*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
 INSERT INTO `sys_menu` (`id`, `parent_id`, `title`, `name`, `path`, `icon`, `statu`, `comments`) VALUES
@@ -175,9 +244,10 @@ INSERT INTO `sys_menu` (`id`, `parent_id`, `title`, `name`, `path`, `icon`, `sta
 	(7, 5, '软件部署', 'soft_deploy', '/soft_deploy', 'el-icon-s-claim', NULL, NULL),
 	(8, NULL, '管理', 'manage', NULL, 'el-icon-s-claim', NULL, NULL),
 	(9, 8, 'Zabbix', 'zabbix', '/zabbix', 'el-icon-s-claim', 0, NULL),
-	(10, 8, '软件配置', 'soft_s', '/soft_s', 'el-icon-s-claim', NULL, NULL),
+	(10, 8, '应用配置', 'app_conf', '/app_conf', 'el-icon-s-claim', NULL, NULL),
 	(11, 8, '资源管理', 'resource_management', '/resource_management', 'el-icon-place', NULL, NULL),
 	(12, 5, '应用部署', 'app_deploy', '/app_deploy', 'el-icon-s-claim', NULL, NULL),
+	(13, 8, '包管理', 'package_manage', '/package_manage', 'el-icon-goods', NULL, NULL),
 	(100, NULL, '维护', 'info_record', NULL, 'el-icon-s-custom', 1, NULL),
 	(101, 100, '平台配置', 'setting', '/setting', 'el-icon-s-custom', NULL, NULL);
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
@@ -200,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `user_account_userinfo` (
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.user_account_userinfo 的数据：~1 rows (大约)
+-- 正在导出表  xlauto.user_account_userinfo 的数据：~0 rows (大约)
 DELETE FROM `user_account_userinfo`;
 /*!40000 ALTER TABLE `user_account_userinfo` DISABLE KEYS */;
 INSERT INTO `user_account_userinfo` (`id`, `password`, `last_login`, `user_name`, `gender`, `job_number`, `mail`, `user_post`, `user_department`, `nick`, `status`) VALUES

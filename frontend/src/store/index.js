@@ -1,10 +1,11 @@
 // import Vue from 'vue'
 import Vuex from 'vuex'
-
+import { setItem, getItem } from "@/utils/storage";
 // Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    token: getItem("token") || {},
     tabsPage: [{
       title: '主页',
       name: 'home'
@@ -12,6 +13,10 @@ export default new Vuex.Store({
     TabsValue: ''
   },
   mutations: {
+    mSetTokenInfo(state, tokenObj) {
+            state.token = tokenObj      // 刷新会丢失所以进行持久化 调用上面storage.js文件里setItem方法保存token
+            setItem("token", tokenObj)
+        },
     editableTabs: (state, obj) => {
       // obj = obj.entity
       // 浅拷贝 store.tabsPage

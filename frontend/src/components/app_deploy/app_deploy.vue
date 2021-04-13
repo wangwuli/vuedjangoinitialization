@@ -71,6 +71,10 @@
               label="部署状态"
               prop="desc">
           </el-table-column>
+          <el-table-column
+              label="运行状态"
+              prop="desc">
+          </el-table-column>
         </el-table>
       </el-main>
     </el-container>

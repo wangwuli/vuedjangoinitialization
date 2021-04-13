@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-
+import datetime
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -39,7 +39,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
+
+REST_FRAMEWORK = {
+    # DEFAULT_PERMISSION_CLASSES设置默认的权限类，通过认证后赋予用户的权限
+    'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.IsAuthenticated', ),
+    # DEFAULT_AUTHENTICATION_CLASSES设置默认的认证类，这里用token，也可以设置session或自定义的认证
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_simplejwt.authentication.JWTAuthentication', # 进行token认证
+    )
+}
+
+SIMPLE_JWT = {
+     # ACCESS_TOKEN_LIFETIME设置token令牌有效时间
+     # rest_framework_simplejwt官方默认有效时间是5分钟，这里改成15天
+     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=15),
+     # REFRESH_TOKEN_LIFETIME设置token刷新令牌有效时间
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=15),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
