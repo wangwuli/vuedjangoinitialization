@@ -18,12 +18,11 @@ var base = ''
 const instance = axios.create();
 // 在instance(这是上面定义的自定义axios请求名称)上添加请求拦截器 补充请求头token信息
 instance.interceptors.request.use(function (config) {
-  // 从vuex中取出token,这里先这样写，下面会说这里是怎么回事
   const token = store.state.token;
-  // 如果有token则添加到headers中
+  debugger
     if (token) {
         //将token放到请求头发送给服务器,将tokenkey放在请求头中
-        config.headers.accessToken = token;
+        config.headers.Authorization = token;
         //也可以这种写法
         // config.headers['accessToken'] = Token;
          return config;
@@ -38,6 +37,7 @@ export default instance
 
 export const POST = (url, params) => {
   return instance.post(`${base}${url}`, params)
+
 }
 
 export const GET = (url, params) => {

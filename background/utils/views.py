@@ -19,8 +19,8 @@ class DateEncoder(json.JSONEncoder):
 
 
 class Result():
-    success_code = "0"
-    fail_code = "1"
+    success_code = 1
+    fail_code = 0
 
     @staticmethod
     def success(data=[], msg="查询成功", count=-1):

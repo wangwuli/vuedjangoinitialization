@@ -149,21 +149,83 @@ DELETE FROM `django_session`;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 
--- 导出  表 xlauto.link_env 结构
-DROP TABLE IF EXISTS `link_env`;
-CREATE TABLE IF NOT EXISTS `link_env` (
+-- 导出  表 xlauto.elink_env 结构
+DROP TABLE IF EXISTS `elink_env`;
+CREATE TABLE IF NOT EXISTS `elink_env` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `env_name` varchar(50) DEFAULT NULL COMMENT '环境名',
+  `env_type_code` varchar(50) DEFAULT NULL COMMENT 'sys_code.env_type',
   `env_code` varchar(50) DEFAULT NULL COMMENT '环境编码',
-  `列 4` varchar(50) DEFAULT NULL,
+  `env_ops_manage` varchar(50) DEFAULT NULL,
+  `comment` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `env_code` (`env_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  xlauto.elink_env 的数据：~1 rows (大约)
+DELETE FROM `elink_env`;
+/*!40000 ALTER TABLE `elink_env` DISABLE KEYS */;
+INSERT INTO `elink_env` (`id`, `env_name`, `env_type_code`, `env_code`, `env_ops_manage`, `comment`) VALUES
+	(1, '菲寓阿里云', 'production', 'FYALI', NULL, NULL);
+/*!40000 ALTER TABLE `elink_env` ENABLE KEYS */;
+
+-- 导出  表 xlauto.elink_project 结构
+DROP TABLE IF EXISTS `elink_project`;
+CREATE TABLE IF NOT EXISTS `elink_project` (
+  `project_id` int(11) NOT NULL,
+  `project_code` varchar(50) NOT NULL,
+  `project_name` varchar(50) DEFAULT NULL,
+  `project_management` varchar(50) DEFAULT NULL COMMENT '项目联络人',
+  `project_management_call` varchar(50) DEFAULT NULL COMMENT '项目联络人联系方式',
+  `comment` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.link_env 的数据：~0 rows (大约)
-DELETE FROM `link_env`;
-/*!40000 ALTER TABLE `link_env` DISABLE KEYS */;
-/*!40000 ALTER TABLE `link_env` ENABLE KEYS */;
+-- 正在导出表  xlauto.elink_project 的数据：~0 rows (大约)
+DELETE FROM `elink_project`;
+/*!40000 ALTER TABLE `elink_project` DISABLE KEYS */;
+INSERT INTO `elink_project` (`project_id`, `project_code`, `project_name`, `project_management`, `project_management_call`, `comment`) VALUES
+	(0, 'FY', '菲寓', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `elink_project` ENABLE KEYS */;
+
+-- 导出  表 xlauto.hosts_management 结构
+DROP TABLE IF EXISTS `hosts_management`;
+CREATE TABLE IF NOT EXISTS `hosts_management` (
+  `host_id` int(11) NOT NULL AUTO_INCREMENT,
+  `host_ip` varchar(50) DEFAULT NULL,
+  `host_connection_code` varchar(50) DEFAULT NULL COMMENT 'sys_code.host_connection_type',
+  `host_connection_port` int(11) DEFAULT NULL,
+  `host_users_id` int(11) DEFAULT NULL,
+  `comment` varchar(500) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`host_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  xlauto.hosts_management 的数据：~1 rows (大约)
+DELETE FROM `hosts_management`;
+/*!40000 ALTER TABLE `hosts_management` DISABLE KEYS */;
+INSERT INTO `hosts_management` (`host_id`, `host_ip`, `host_connection_code`, `host_connection_port`, `host_users_id`, `comment`) VALUES
+	(1, '192.168.1.1', 'ssh', 22, 0, NULL);
+/*!40000 ALTER TABLE `hosts_management` ENABLE KEYS */;
+
+-- 导出  表 xlauto.hosts_users 结构
+DROP TABLE IF EXISTS `hosts_users`;
+CREATE TABLE IF NOT EXISTS `hosts_users` (
+  `host_users_id` int(11) NOT NULL,
+  `user_id` varchar(50) DEFAULT NULL,
+  `user_name` varchar(50) DEFAULT NULL,
+  `user_password` varchar(50) DEFAULT NULL,
+  `host_user_code` varchar(50) DEFAULT NULL COMMENT 'sys_code.host_user_type',
+  `comment` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`host_users_id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 正在导出表  xlauto.hosts_users 的数据：~0 rows (大约)
+DELETE FROM `hosts_users`;
+/*!40000 ALTER TABLE `hosts_users` DISABLE KEYS */;
+INSERT INTO `hosts_users` (`host_users_id`, `user_id`, `user_name`, `user_password`, `host_user_code`, `comment`) VALUES
+	(0, '45d547bc-9cc6-11eb-b7f9-02420aff000a', 'root', '123456', 'admin', NULL);
+/*!40000 ALTER TABLE `hosts_users` ENABLE KEYS */;
 
 -- 导出  表 xlauto.package_management 结构
 DROP TABLE IF EXISTS `package_management`;
@@ -181,18 +243,17 @@ CREATE TABLE IF NOT EXISTS `package_management` (
   `comment` varchar(50) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.package_management 的数据：~0 rows (大约)
+-- 正在导出表  xlauto.package_management 的数据：~5 rows (大约)
 DELETE FROM `package_management`;
 /*!40000 ALTER TABLE `package_management` DISABLE KEYS */;
 INSERT INTO `package_management` (`id`, `package_name`, `project_id`, `package_git_url`, `branch`, `package_versions`, `package_repository_url`, `package_repository_code`, `package_nick`, `package_type_code`, `comment`) VALUES
-	(1, 'testPackage', 11, 'http://www.baidu.com', NULL, '2', 'http://www.baidu.com', '', '0', '1', '0'),
-	(2, 'testPackage2', 12, 'http://www.baidu.com', NULL, NULL, '2', 'http://www.baidu.com', '', '0', '1'),
-	(3, 'testPackage3', 13, 'http://www.baidu.com', NULL, NULL, '2', 'http://www.baidu.com', '', '0', '1'),
-	(4, 'xx1', 1, 'xx1', 'xx1', 'xx1', 'xx1', 'xx1', NULL, 'shanghai', 'xx1'),
-	(5, 'xx1', 1, 'xx1', 'xx1', 'xx1', 'xx1', 'xx1', NULL, 'shanghai', 'xx1'),
-	(6, 'xx2', 2, 'xx2', 'xx2', 'xx2', 'xx2', 'xx2', NULL, 'beijing', 'xx2');
+	(7, 'xx35', 35, 'xx3', 'xx3', 'xx3', 'xx3', 'xx3', NULL, 'ftp', 'xx3'),
+	(8, 'xx4', 4, 'xx4', 'xx4', 'xx4', 'xx4', 'xx4', NULL, 'nexus', 'xx4'),
+	(9, 'xx5', 5, 'xx5', 'xx5', 'xx5', 'xx5', 'xx5', NULL, 'war', 'xx5'),
+	(10, 'xx6', 6, 'xx6', 'xx6', 'xx6', 'xx6', 'xx6', NULL, 'jar', 'xx6'),
+	(13, 'xx7', 7, 'xx7', 'xx7', 'xx7', 'xx7', 'xx7', NULL, 'war', 'xx7');
 /*!40000 ALTER TABLE `package_management` ENABLE KEYS */;
 
 -- 导出  表 xlauto.sys_code 结构
@@ -205,17 +266,25 @@ CREATE TABLE IF NOT EXISTS `sys_code` (
   `sys_code_father` varchar(50) DEFAULT NULL,
   `sys_code_sort` varchar(50) DEFAULT NULL,
   `comment` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`sys_code_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`sys_code_id`),
+  UNIQUE KEY `sys_code` (`sys_code`,`sys_code_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- 正在导出表  xlauto.sys_code 的数据：~0 rows (大约)
+-- 正在导出表  xlauto.sys_code 的数据：~11 rows (大约)
 DELETE FROM `sys_code`;
 /*!40000 ALTER TABLE `sys_code` DISABLE KEYS */;
 INSERT INTO `sys_code` (`sys_code_id`, `sys_code`, `sys_code_name`, `sys_code_type`, `sys_code_father`, `sys_code_sort`, `comment`) VALUES
 	(1, 'ftp', 'FTP', 'package_repository', NULL, NULL, NULL),
 	(2, 'nexus', 'Nexus', 'package_repository', NULL, NULL, NULL),
 	(3, 'jar', 'Jar', 'package_type', NULL, NULL, NULL),
-	(4, 'war', 'War', 'package_type', NULL, NULL, NULL);
+	(4, 'war', 'War', 'package_type', NULL, NULL, NULL),
+	(5, 'production', '生产', 'env_type', NULL, NULL, NULL),
+	(6, 'develop', '开发', 'env_type', NULL, NULL, NULL),
+	(7, 'ssh', 'SSH', 'host_connection_type', NULL, NULL, '主机连接类型'),
+	(8, 'telnet', 'Telnet', 'host_connection_type', NULL, NULL, '主机连接类型'),
+	(9, 'root_user', '管理员', 'host_user_type', NULL, NULL, '主机用户类型'),
+	(10, 'soft_user', '软件用户', 'host_user_type', NULL, NULL, '主机用户类型'),
+	(11, 'normal_user', '普通用户', 'host_user_type', NULL, NULL, '主机用户类型');
 /*!40000 ALTER TABLE `sys_code` ENABLE KEYS */;
 
 -- 导出  表 xlauto.sys_menu 结构

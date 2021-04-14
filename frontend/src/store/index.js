@@ -1,6 +1,6 @@
 // import Vue from 'vue'
 import Vuex from 'vuex'
-import { setItem, getItem } from "@/utils/storage";
+import { setItem, getItem } from "@/general/storage";
 // Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,6 +14,7 @@ export default new Vuex.Store({
   },
   mutations: {
     mSetTokenInfo(state, tokenObj) {
+      //debugger
             state.token = tokenObj      // 刷新会丢失所以进行持久化 调用上面storage.js文件里setItem方法保存token
             setItem("token", tokenObj)
         },

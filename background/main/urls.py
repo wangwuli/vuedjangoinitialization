@@ -18,13 +18,13 @@ from django.conf.urls import url
 from django.urls import path
 
 from components.home.menu_manage.views import MenuManage
-from components.login.views import Login
+from components.login.views import MyTokenObtainPairView
 from components.user_manage.views import Create_user
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^background/login$', Login.as_view()),
+    url(r'^background/login$', MyTokenObtainPairView.as_view()),
     url(r'^background/create_user$', Create_user.as_view()),
     url(r'^background/home/menu_manage$', MenuManage.as_view()),
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # 登录一般是login
