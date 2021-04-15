@@ -1,5 +1,9 @@
 <template>
   <div class="navMenu">
+    <el-submenu index="user_info" style="float: right" >
+    <template #title>{{ userinfo.nick }}</template>
+    <el-menu-item index="user_info-3" @click="logout">注销</el-menu-item>
+    </el-submenu>
 
     <template v-for="navMenu in navMenus">
         <!-- 最后一级菜单 -->
@@ -32,14 +36,28 @@
 
 <script>
 import { mapActions } from 'vuex'
+import store from "@/store/index";
+
 export default {
   name: 'NavMenu',
   props: ['navMenus'],
-  data () { return {} },
+  data () { return {
+    userinfo: store.state.userInfo
+  } },
   methods: {
     ...mapActions({
       handleOpen2: 'editableTabs'
-    })
+    }),
+    logout () {
+      localStorage.clear()
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+      this.$router.push({
+        name: "login"
+      })
+    }
   }
 }
 </script>

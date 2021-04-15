@@ -1,16 +1,25 @@
 <template>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="用户名" prop="user_name">
-      <el-input v-model.number="ruleForm.user_name"></el-input>
-    </el-form-item>
-    <el-form-item label="密码" prop="password">
-      <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
-    </el-form-item>
-  </el-form>
+  <el-container :style='{height: this.client_adjust + "px"}'>
+    <el-aside width="400px">
+<!--        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">-->
+      <el-card class="box-card" :style='{"padding-top": this.client_adjust_half + "px"}'>
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"
+                 size="mini">
+          <el-form-item label="用户名" prop="user_name">
+            <el-input v-model.number="ruleForm.user_name"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </el-aside>
+    <el-main>Main</el-main>
+  </el-container>
 </template>
 
 <script>
@@ -31,6 +40,9 @@ export default {
       callback();
     };
     return {
+      client_adjust: 0,
+      clientW: document.documentElement.clientWidth,
+      clientH: document.documentElement.clientHeight,
       ruleForm: {
         password: '',
         user_name: ''
@@ -44,6 +56,10 @@ export default {
         ]
       }
     };
+  },
+  created () {
+    this.client_adjust = this.clientH - 30
+    this.client_adjust_half = this.clientH * 0.5
   },
   methods: {
     submitForm(formName) {
@@ -64,8 +80,9 @@ export default {
       if (response && response.data) {
         var return_data = response.data
         if (return_data.success) {
-          //debugger
+          debugger
           this.$store.commit("mSetTokenInfo", return_data.data.access)
+          this.$store.commit("setUserinfo", return_data.data.userinfo)
 
           // this.$router.push("/home")
           this.$router.push({
@@ -84,3 +101,18 @@ export default {
   },
 }
 </script>
+
+<style>
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    padding: 18px 0;
+  }
+
+  .box-card {
+    width: 90%;
+    padding-left: 20px;
+  }
+</style>

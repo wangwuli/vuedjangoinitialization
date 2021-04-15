@@ -19,7 +19,6 @@ const instance = axios.create();
 // 在instance(这是上面定义的自定义axios请求名称)上添加请求拦截器 补充请求头token信息
 instance.interceptors.request.use(function (config) {
   const token = store.state.token;
-  debugger
     if (token) {
         //将token放到请求头发送给服务器,将tokenkey放在请求头中
         config.headers.Authorization = token;

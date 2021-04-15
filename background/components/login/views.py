@@ -23,7 +23,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['access'] =  'Bearer ' + str(refresh.access_token)
 
         # Add extra responses here
-        data['username'] = self.user.user_name
+        data['userinfo'] = {
+            'username': self.user.user_name,
+            'nick': self.user.nick
+        }
         # data['groups'] = self.user.groups.values_list('name', flat=True)
 
         result = {"success": True, "data": data, "msg": "登录成功"}

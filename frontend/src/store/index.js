@@ -10,11 +10,14 @@ export default new Vuex.Store({
       title: '主页',
       name: 'home'
     }],
-    TabsValue: ''
+    TabsValue: '',
+    userInfo: {}
   },
   mutations: {
+    setUserinfo(state, tokenObj) {
+      state.userInfo = tokenObj
+    },
     mSetTokenInfo(state, tokenObj) {
-      //debugger
             state.token = tokenObj      // 刷新会丢失所以进行持久化 调用上面storage.js文件里setItem方法保存token
             setItem("token", tokenObj)
         },
