@@ -3,11 +3,16 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import InvalidToken, AuthenticationFailed
+
 from background.utils.views import Result
 
-
+from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+from user_account.models import UserInfo
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -15,7 +20,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         refresh = self.get_token(self.user)
         data['refresh'] = str(refresh)
-        data['access'] =  'JWT ' + str(refresh.access_token)
+        data['access'] =  'Bearer ' + str(refresh.access_token)
 
         # Add extra responses here
         data['username'] = self.user.user_name
@@ -30,7 +35,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-
+#https://blog.csdn.net/tlju_xiao_ma/article/details/114182293
 
 # class Login(APIView):
 #     def get(self, request):

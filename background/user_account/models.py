@@ -5,6 +5,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
 # Create your models here.
+
 from user_account.views import CustomUserManager
 
 
@@ -21,3 +22,12 @@ class UserInfo(AbstractBaseUser):
     USERNAME_FIELD = 'user_name'
 
     objects = CustomUserManager()
+
+    @property
+    def is_authenticated(self):
+        """
+        rest_framework_simplejwt 模块
+        Always return True. This is a way to tell if the user has been
+        authenticated in templates.
+        """
+        return True

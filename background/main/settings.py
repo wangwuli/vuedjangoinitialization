@@ -45,7 +45,9 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     # DEFAULT_PERMISSION_CLASSES设置默认的权限类，通过认证后赋予用户的权限
-    'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.IsAuthenticated', ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     # DEFAULT_AUTHENTICATION_CLASSES设置默认的认证类，这里用token，也可以设置session或自定义的认证
     'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework_simplejwt.authentication.JWTAuthentication', # 进行token认证
@@ -59,6 +61,14 @@ SIMPLE_JWT = {
      # REFRESH_TOKEN_LIFETIME设置token刷新令牌有效时间
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=15),
 }
+
+# # jwt设置
+# JWT_AUTH = {
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),  # 设置 JWT Token 的有效时间
+#     'JWT_ALLOW_REFRESH': True,
+#     'JWT_AUTH_HEADER_PREFIX': 'JWT',  # 设置 请求头中的前缀，不写默认是"JWT "
+#     'JWT_RESPONSE_PAYLOAD_HANDLER': 'utils.jwt_handler.jwt_response_payload_handler',
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
